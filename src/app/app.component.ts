@@ -42,7 +42,7 @@ export class AppComponent {
     console.log(this.currentPromptData + '\n\n' + this.inputTextStr + '\n\n');
   }
   configuration = new Configuration({
-    apiKey: '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',
+    apiKey: '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',
   });
   openai = new OpenAIApi(this.configuration);
   async generateOutput() {

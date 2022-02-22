@@ -1,0 +1,54 @@
+{
+  "prompt": [
+    {
+      "name": "Summarize",
+      "data": "Paraphrase the following content in 300 words.",
+      "information": "More info about the summary"
+    },
+    {
+      "name": "Content Outline",
+      "data": "Write a Content Outline",
+      "information": "More info about the Content Outline"
+    },
+    {
+      "name": "Content Chunk (Bloom)",
+      "data": "Write a Content Chunk (Bloom)",
+      "information": "More info about the Content Chunk (Bloom)"
+    },
+    {
+      "name": "Learning Objectives (Mager)",
+      "data": "Create course learning objectives for the following content applying Robert Mager's performance-based learning objectives model.",
+      "information": "More info about the Learning Objectives (Mager)"
+    },
+    {
+      "name": "Quiz (Multiple Choice)",
+      "data": "Write a Quiz (Multiple Choice)",
+      "information": "More info about the Quiz (Multiple Choice)"
+    },
+    {
+      "name": "FAQs",
+      "data": "Create 5 FAQs from the following content.",
+      "information": "More info about the FAQs"
+    },
+    {
+      "name": "Best Practices",
+      "data": "Write Best Practices ",
+      "information": "More info about the Best Practices"
+    },
+    {
+      "name": "Scenario",
+      "data": "Write a Scenario",
+      "information": "More info about the Scenario"
+    },
+    {
+      "name": "Grammar Correction",
+      "data": "Write a Grammar Correction",
+      "information": "More info about the Grammar Correction"
+    },
+    {
+      "name": "Custom",
+      "data": "Write a Custom prompt",
+      "information": "More info about the Custom prompt"
+    }
+  ]
+}

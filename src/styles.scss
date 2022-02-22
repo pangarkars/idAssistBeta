@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: none;
+}
+.header {
+  overflow: hidden;
+  background-color: #2eb4cc;
+  padding: 0px 10px;
+  height: auto;
+}
+.itemLabel {
+  height: 50px;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+}
+.itemPrompt {
+  background-color: rgb(132, 136, 136);
+  cursor: default;
+}
+.itemInputOutput {
+  background-color: rgb(231, 238, 238);
+  cursor: pointer;
+}
+.centerText {
+  position: relative;
+  top: 19%;
+}
+.isActive {
+  background-color: gray;
+  color: white;
+}
+.showScroll {
+  overflow-y: auto;
+  scroll-behavior: auto;
+}
+
+.pageHeight {
+  height: 800px;
+}
+
+.showBorder {
+  border: 1px solid rgb(199, 192, 192);
+}
+.btnWidth {
+  width: 20%;
+  align-self: center;
+}
+.inputHeight {
+  height: 100%;
+}
+.activePromptBtn {
+  color: blue;
+}
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+}

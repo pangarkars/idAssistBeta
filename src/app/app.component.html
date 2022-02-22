@@ -1,0 +1,187 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="header">
+  <nav class="navbar navbar-light">
+    <div class="container-fluid">
+      <div class="navbar-brand">ID-Assist (Beta)</div>
+      <div class="d-flex">© 2022 Asterial</div>
+    </div>
+  </nav>
+</div>
+
+<div class="showBorder">
+  <div class="row itemLabel m-auto">
+    <div class="col showBorder col col-lg-2 itemPrompt">
+      <div class="centerText">Prompt</div>
+    </div>
+    <div
+      class="col showBorder itemInputOutput"
+      (click)="selectTab('input')"
+      [ngClass]="{ isActive: showInput, itemInputOutput: showOutput }"
+    >
+      <div class="centerText">Input</div>
+    </div>
+    <div
+      class="col showBorder itemInputOutput"
+      (click)="selectTab('output')"
+      [ngClass]="{ isActive: showOutput, itemInputOutput: showInput }"
+    >
+      <div class="centerText">Output</div>
+    </div>
+  </div>
+  <div class="row m-auto">
+    <div class="col showBorder col col-lg-2">
+      <div
+        #promptList
+        class="d-flex btn-group flex-column bd-highlight mb-3 showScroll"
+        role="group"
+      >
+        <ul class="list-group" *ngFor="let item of promptData; let i = index">
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="me-auto">
+              <button
+                class="btn fw-bold"
+                [ngClass]="{ activePromptBtn: currentPromptBtn == 'btn' + i }"
+                (click)="setPromptData(item.data, 'btn' + i)"
+              >
+                {{ item.name }}
+              </button>
+            </div>
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-bs-toggle="tooltip"
+              title="{{ item.information }}"
+            >
+              <i class="bi bi-info-circle"></i>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="col showBorder d-flex flex-column justify-content-between form-outline"
+      *ngIf="showInput"
+    >
+      <textarea
+        type="text"
+        class="form-control inputHeight mt-2 mb-2"
+        id="inputText"
+        [attr.disabled]="totalWords > maxWords ? '' : null"
+        rows="3"
+        name="inputText"
+        [(ngModel)]="inputTextStr"
+        #inputText="ngModel"
+        (keydown)="wordCounter(inputTextStr)"
+      ></textarea>
+      <button
+        type="button"
+        class="btn btn-primary btnWidth mt-2 mb-2"
+        (click)="generateOutput()"
+      >
+        Generate
+      </button>
+    </div>
+    <div
+      class="col showBorder d-flex flex-column justify-content-between form-outline"
+      *ngIf="showOutput"
+    >
+      <textarea
+        type="text"
+        class="form-control inputHeight mt-2 mb-2"
+        id="outputText"
+        [attr.disabled]="totalWords > maxWords ? '' : null"
+        rows="3"
+        name="outputText"
+        [(ngModel)]="outputTextStr"
+        #outputText="ngModel"
+        (keydown)="wordCounter(outputTextStr)"
+      ></textarea>
+      <button type="button" class="btn btn-primary btnWidth mt-2 mb-2">
+        Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Values</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 row">
+          <label for="inputTemperature" class="col-sm-4 col-form-label"
+            >Temperature</label
+          >
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputTemperature" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="max_tokens" class="col-sm-4 col-form-label"
+            >Mac Tokens</label
+          >
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="max_tokens" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="top_p" class="col-sm-4 col-form-label">Top P</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="top_p" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="frequency_penalty" class="col-sm-4 col-form-label"
+            >Frequency Penalty</label
+          >
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="frequency_penalty" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="presence_penalty" class="col-sm-4 col-form-label"
+            >Presence Penalty</label
+          >
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="presence_penalty" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Launch demo modal
+</button> -->
+<div class="text-center spinner" *ngIf="showLoader">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

@@ -22,7 +22,6 @@ export class AppComponent {
   currentPromptData: string = '';
   currentPromptBtn: string = '';
   showLoader: boolean = false;
-  tmpData: string = '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';
 
   selectTab(tabName: string) {
     if (tabName === 'input') {
@@ -43,7 +42,7 @@ export class AppComponent {
     console.log(this.currentPromptData + '\n\n' + this.inputTextStr + '\n\n');
   }
   configuration = new Configuration({
-    apiKey: this.tmpData,
+    apiKey: process.env.OPENAI_SECRET_KEY,
   });
   openai = new OpenAIApi(this.configuration);
   async generateOutput() {

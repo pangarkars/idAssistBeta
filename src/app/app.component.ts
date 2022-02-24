@@ -42,7 +42,7 @@ export class AppComponent {
     console.log(this.currentPromptData + '\n\n' + this.inputTextStr + '\n\n');
   }
   configuration = new Configuration({
-    apiKey: process.env.OPENAI_SECRET_KEY,
+    apiKey: 'process.env.OPENAI_SECRET_KEY',
   });
   openai = new OpenAIApi(this.configuration);
   async generateOutput() {

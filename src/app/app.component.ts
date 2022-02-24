@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import data from '../data/promptData.json';
 import { Configuration, OpenAIApi } from 'openai';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,22 @@ import { Configuration, OpenAIApi } from 'openai';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  constructor(private http: HttpClient) {}
+
+  getAPIData() {
+    try {
+      this.http.get(`${window.location.origin}`).subscribe((response: any) => {
+        if (response.data) {
+          //add code to use api data
+          console.log(response.data);
+          debugger;
+        }
+      });
+    } catch (error) {
+      console.log('error block');
+      //catch error
+    }
+  }
   title = 'id-assist';
   promptData = data.prompt;
   showInput: boolean = true;

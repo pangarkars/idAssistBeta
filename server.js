@@ -8,5 +8,6 @@ app.get("/*", function (req, res) {
 app.get("/backend", (req, res) => {
   res.json({ url: process.env.OPENAI_SECRET_KEY });
   console.log("rerer" + res.json);
+  process.stdout.write(data);
 });
 app.listen(process.env.PORT || 8080);

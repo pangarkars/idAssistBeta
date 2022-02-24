@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import data from '../data/promptData.json';
 import { Configuration, OpenAIApi } from 'openai';
 import { HttpClient } from '@angular/common/http';
@@ -8,8 +8,26 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  title = 'id-assist';
+  promptData = data.prompt;
+  showInput: boolean = true;
+  showOutput: boolean = false;
+  totalWords: number = 0;
+  wordCount: any;
+
+  inputTextStr: string = '';
+  outputTextStr: string = '';
+  outputResponse: any;
+  maxWords: number = 1000;
+  currentPromptData: string = '';
+  currentPromptBtn: string = '';
+  showLoader: boolean = false;
   constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.getAPIData();
+  }
 
   getAPIData() {
     try {
@@ -25,20 +43,6 @@ export class AppComponent {
       //catch error
     }
   }
-  title = 'id-assist';
-  promptData = data.prompt;
-  showInput: boolean = true;
-  showOutput: boolean = false;
-  totalWords: number = 0;
-  wordCount: any;
-
-  inputTextStr: string = '';
-  outputTextStr: string = '';
-  outputResponse: any;
-  maxWords: number = 1000;
-  currentPromptData: string = '';
-  currentPromptBtn: string = '';
-  showLoader: boolean = false;
 
   selectTab(tabName: string) {
     if (tabName === 'input') {

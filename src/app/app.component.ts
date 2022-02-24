@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import data from '../data/promptData.json';
 import { Configuration, OpenAIApi } from 'openai';
 import { HttpClient } from '@angular/common/http';
+import { EnvServiceService } from './env-service.service';
 
 @Component({
   selector: 'app-root',
@@ -23,12 +24,21 @@ export class AppComponent implements OnInit {
   currentPromptData: string = '';
   currentPromptBtn: string = '';
   showLoader: boolean = false;
-  constructor(private http: HttpClient) {}
+  secretToken: string = '';
+  constructor(
+    private http: HttpClient,
+    private envService: EnvServiceService
+  ) {}
 
   ngOnInit() {
-    this.getAPIData();
+    // this.getAPIData();
+    this.loadEnv();
   }
-
+  loadEnv() {
+    this.envService.getEnv().subscribe((res) => {
+      this.secretToken = res;
+    });
+  }
   getAPIData() {
     try {
       this.http.get(`${window.location.origin}`).subscribe((response: any) => {

@@ -14,12 +14,37 @@ import { map } from 'rxjs/operators';
 export class EnvServiceService {
   env: any;
   constructor(private http: HttpClient) {}
+
   getEnv(): Observable<any> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append(
+      'Accept',
+      'application/vnd.heroku+json; version=3'
+    );
+
     console.log('trying to get heroku env...');
     this.env = this.http.get(
-      'https://api.heroku.com/apps/name-of-app/config-vars'
+      'https://api.heroku.com/apps/name-of-app/config-vars',
+      {
+        headers: headers,
+      }
     );
     console.log(this.env);
     return this.env;
   }
+
+  /*   getToken(){
+    this.http
+      .get(window.location.origin + '/backend')
+      .map((response: Response) => response.json())
+      .subscribe(
+        (urlBackend) => {
+          sessionStorage.setItem('url_backend', urlBackend.url);
+        },
+        () => {
+          console.log('CanÂ´t find the backend URL, using a failover value');
+          sessionStorage.setItem('url_backend', 'https://failover-url.com');
+        }
+      );
+  } */
 }

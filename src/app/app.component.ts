@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   secretToken: string = '';
   testToken: string =
     '#1212#sk-iSwTwSy8NXDN7afXsebpT3Blbk#1212#FJUCoHbGUuxeba0gG4eA0n#1212#';
+
   constructor(
     private http: HttpClient,
     private envService: EnvServiceService
@@ -36,8 +37,6 @@ export class AppComponent implements OnInit {
     this.getAPIData();
     this.fetchSecretKey();
     // this.loadEnv();
-    this.testToken = this.testToken.replace(/#1212#/g, '');
-    console.log(this.testToken);
   }
 
   fetchSecretKey() {
@@ -86,7 +85,7 @@ export class AppComponent implements OnInit {
     console.log(this.currentPromptData + '\n\n' + this.inputTextStr + '\n\n');
   }
   configuration = new Configuration({
-    apiKey: this.testToken,
+    apiKey: this.testToken.replace(/#1212#/g, ''),
   });
   openai = new OpenAIApi(this.configuration);
   async generateOutput() {

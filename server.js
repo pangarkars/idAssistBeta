@@ -24,7 +24,7 @@ app.use(express.static(__dirname + "/dist/id-assist"));
   }); */
 
 app.get("", function (req, res) {
-  res.json("Sample TOKEN will be shared here");
+  res.json(TOKEN);
 });
 
 app.get("/*", function (req, res) {

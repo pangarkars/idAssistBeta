@@ -16,7 +16,10 @@ export class EnvServiceService {
   constructor(private http: HttpClient) {}
   getEnv(): Observable<any> {
     console.log('trying to get heroku env...');
-    this.env = this.http.get('');
+    this.env = this.http.get(
+      'https://api.heroku.com/apps/name-of-app/config-vars'
+    );
+    console.log(this.env);
     return this.env;
   }
 }

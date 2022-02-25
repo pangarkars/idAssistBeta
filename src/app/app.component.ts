@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
   }
   loadEnv() {
     this.envService.getEnv().subscribe((res) => {
+      console.log(res);
       this.secretToken = res;
     });
   }

@@ -25,6 +25,8 @@ var options = {
     "api-key": process.env.OPENAI_SECRET_KEY,
   },
 };
+console.log("#####")
+console.log(options)
 
 /**
  * API call
@@ -36,9 +38,15 @@ app.get("/getKey", (req, res) => {
     .then((dataResponse) => {
       //API response
       res.json({ data: dataResponse.data });
+    console.log("@@@@@@@@")
+console.log(options)
+
     })
     .catch((err) => {
       //error handler
+    console.log("$$$$$##")
+console.log(options)
+
       next(err);
       console.log(err);
     });

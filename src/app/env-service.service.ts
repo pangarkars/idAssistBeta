@@ -37,7 +37,10 @@ export class EnvServiceService {
   }
 
   getSecretKey(): Observable<any> {
-    this.httpHeaders.append('Accept', 'application/vnd.heroku+json; version=3');
+    this.httpHeaders = this.httpHeaders.append(
+      'Accept',
+      'application/vnd.heroku+json; version=3'
+    );
     let API_URL = 'https://api.heroku.com/apps/idassistbeta1/config-vars';
     return this.http.get(API_URL, { headers: this.httpHeaders }).pipe(
       map((res: any) => {

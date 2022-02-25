@@ -8,7 +8,7 @@ let SECRET_KEY = "";
 
 app.use(express.static(__dirname + "/dist/id-assist"));
 
-heroku
+/* heroku
   .request({
     method: "GET",
     path: "https://api.heroku.com/apps/name-of-app/config-vars",
@@ -21,11 +21,14 @@ heroku
   .then((response) => {
     console.log(response, ">>>>>>heroku api...");
     SECRET_KEY = response.OPENAI_SECRET_KEY;
-  });
+  }); */
 
-app.get("/heroku-env", function (req, res) {
-  res.json(TOKEN);
-});
+app.get(
+  "https://api.heroku.com/apps/name-of-app/config-vars",
+  function (req, res) {
+    res.json(TOKEN);
+  }
+);
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/id-assist/index.html"));

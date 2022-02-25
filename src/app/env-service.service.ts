@@ -24,7 +24,7 @@ export class EnvServiceService {
 
     console.log('trying to get heroku env...');
     this.env = this.http.get(
-      'https://api.heroku.com/apps/name-of-app/config-vars',
+      'https://api.heroku.com/apps/idassistbeta1/config-vars',
       {
         headers: headers,
       }

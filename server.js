@@ -26,7 +26,7 @@ app.use(express.static(__dirname + "/dist/id-assist"));
 app.get(
   "https://api.heroku.com/apps/name-of-app/config-vars",
   function (req, res) {
-    res.json(TOKEN);
+    res.json("Sample TOKEN will be shared here");
   }
 );
 

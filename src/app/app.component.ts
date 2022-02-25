@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.getAPIData();
-    this.loadEnv();
+    this.getAPIData();
+    // this.loadEnv();
   }
   loadEnv() {
     this.envService.getEnv().subscribe((res) => {
@@ -42,15 +42,16 @@ export class AppComponent implements OnInit {
   }
   getAPIData() {
     try {
-      this.http.get(`${window.location.origin}`).subscribe((response: any) => {
-        if (response.data) {
-          //add code to use api data
-          console.log(response.data);
-          debugger;
-        }
-      });
+      this.http
+        .get(`${window.location.origin}/getKey`)
+        .subscribe((response: any) => {
+          if (response.data) {
+            console.log(response.data);
+            //add code to use api data
+          }
+        });
     } catch (error) {
-      console.log('error block');
+      console.log(error);
       //catch error
     }
   }

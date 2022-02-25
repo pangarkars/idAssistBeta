@@ -46,11 +46,13 @@ export class AppComponent implements OnInit {
         .get(`${window.location.origin}/getKey`)
         .subscribe((response: any) => {
           if (response.data) {
+            console.log("&&&&&&&");
             console.log(response.data);
             //add code to use api data
           }
         });
     } catch (error) {
+      console.log("^^^^^^^");
       console.log(error);
       //catch error
     }

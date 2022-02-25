@@ -4,15 +4,18 @@ import {
   HttpResponse,
   HttpHeaders,
   HttpRequest,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EnvServiceService {
   env: any;
+  httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+
   constructor(private http: HttpClient) {}
 
   getEnv(): Observable<any> {
@@ -33,6 +36,32 @@ export class EnvServiceService {
     return this.env;
   }
 
+  getSecretKey(): Observable<any> {
+    this.httpHeaders.append('Accept', 'application/vnd.heroku+json; version=3');
+    let API_URL = 'https://api.heroku.com/apps/idassistbeta1/config-vars';
+    return this.http.get(API_URL, { headers: this.httpHeaders }).pipe(
+      map((res: any) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  // Error
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Handle client error
+      errorMessage = error.error.message;
+    } else {
+      // Handle server error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(() => {
+      errorMessage;
+    });
+  }
   /*   getToken(){
     this.http
       .get(window.location.origin + '/backend')

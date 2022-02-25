@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   currentPromptBtn: string = '';
   showLoader: boolean = false;
   secretToken: string = '';
+  testToken: string =
+    '*1212#*sk-iSwTwSy8NXDN7afXsebpT3Blbk*1212#*FJUCoHbGUuxeba0gG4eA0n*1212#*';
   constructor(
     private http: HttpClient,
     private envService: EnvServiceService
@@ -32,7 +34,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getAPIData();
+    this.fetchSecretKey();
     // this.loadEnv();
+  }
+
+  fetchSecretKey() {
+    this.envService.getSecretKey().subscribe((res) => {
+      console.log(res);
+    });
   }
   loadEnv() {
     this.envService.getEnv().subscribe((res) => {

@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
-const Heroku = require("heroku-client");
-const heroku = new Heroku({ token: process.env.API_TOKEN });
+//const Heroku = require("heroku-client");
+//const heroku = new Heroku({ token: process.env.API_TOKEN });
 const app = express();
 
 let SECRET_KEY = "";

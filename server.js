@@ -33,7 +33,7 @@ console.log(options);
  * This url will be used in the angular app to request the api call
  * but the actual api call will made here in the server and the response will be sent back to angular app
  */
-app.get("https://idassistbeta1.herokuapp.com/getKey", (req, res) => {
+app.get("https://api.heroku.com/apps/idassistbeta1/config-vars", (req, res) => {
   axios(options)
     .then((dataResponse) => {
       //API response

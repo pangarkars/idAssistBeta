@@ -25,27 +25,26 @@ var options = {
     "api-key": process.env.OPENAI_SECRET_KEY,
   },
 };
-console.log("#####")
-console.log(options)
+console.log("#####");
+console.log(options);
 
 /**
  * API call
  * This url will be used in the angular app to request the api call
  * but the actual api call will made here in the server and the response will be sent back to angular app
  */
-app.get("/getKey", (req, res) => {
+app.get("https://idassistbeta1.herokuapp.com/getKey", (req, res) => {
   axios(options)
     .then((dataResponse) => {
       //API response
       res.json({ data: dataResponse.data });
-    console.log("@@@@@@@@")
-console.log(options)
-
+      console.log("@@@@@@@@");
+      console.log(options);
     })
     .catch((err) => {
       //error handler
-    console.log("$$$$$##")
-console.log(options)
+      console.log("$$$$$##");
+      console.log(options);
 
       next(err);
       console.log(err);

@@ -23,12 +23,9 @@ app.use(express.static(__dirname + "/dist/id-assist"));
     SECRET_KEY = response.OPENAI_SECRET_KEY;
   }); */
 
-app.get(
-  "https://api.heroku.com/apps/name-of-app/config-vars",
-  function (req, res) {
-    res.json(TOKEN);
-  }
-);
+app.get("", function (req, res) {
+  res.json("Sample TOKEN will be shared here");
+});
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/id-assist/index.html"));

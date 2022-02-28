@@ -19,21 +19,10 @@ export class EnvServiceService {
   constructor(private http: HttpClient) {}
 
   getEnv(): Observable<any> {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append(
-      'Accept',
-      'application/vnd.heroku+json; version=3'
-    );
-
     console.log('trying to get heroku env...');
-    this.env = this.http.get(
-      'https://api.heroku.com/apps/idassistbeta1/config-vars',
-      {
-        headers: headers,
-      }
-    );
-    console.log(this.env);
-    return this.env;
+    return this.http
+      .get(window.location.origin + '/backendKey')
+      .pipe(map((response) => response));
   }
 
   getSecretKey(): Observable<any> {
@@ -64,6 +53,13 @@ export class EnvServiceService {
     return throwError(() => {
       errorMessage;
     });
+  }
+
+  getKEyFromNode(): Observable<any> {
+    const url = `${window.location.origin}/config-vars`;
+    return this.http
+      .get(url, { responseType: 'text' })
+      .pipe(map((response: any) => response));
   }
   /*   getToken(){
     this.http

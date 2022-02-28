@@ -5,6 +5,18 @@ const axios = require("axios");
 
 let SECRET_KEY = "";
 
+/**
+ * function to redirect traffic from http to https
+ */
+function requireHTTPS(req, res, next) {
+  // The 'x-forwarded-proto' check is for Heroku
+  if (!req.secure && req.get("x-forwarded-proto") !== "https") {
+    return res.redirect("https://" + req.get("host") + req.url);
+  }
+  next();
+}
+app.use(requireHTTPS);
+
 app.use(express.static(__dirname + "/dist/id-assist"));
 
 /* app.get("/backend", (req, res) => {
@@ -33,19 +45,17 @@ console.log(options);
  * This url will be used in the angular app to request the api call
  * but the actual api call will made here in the server and the response will be sent back to angular app
  */
-app.get("https://api.heroku.com/apps/idassistbeta1/config-vars", (req, res) => {
+app.get("/config-vars", (req, res) => {
   axios(options)
     .then((dataResponse) => {
       //API response
       res.json({ data: dataResponse.data });
       console.log("@@@@@@@@");
-      console.log(options);
+      console.log(dataResponse);
     })
     .catch((err) => {
       //error handler
-      console.log("$$$$$##");
-      console.log(options);
-
+      console.log("$$$$$## error");
       next(err);
       console.log(err);
     });

@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
   getAPIData() {
     try {
       this.http
-        .get(`${window.location.origin}/getKey`)
+        .get(`${window.location.origin}/config-vars`)
         .subscribe((response: any) => {
           if (response.data) {
             console.log('success');

@@ -35,8 +35,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getAPIData();
-    this.fetchSecretKey();
-    // this.loadEnv();
+    // this.fetchSecretKey();
+    this.loadEnv();
   }
 
   fetchSecretKey() {
@@ -48,10 +48,14 @@ export class AppComponent implements OnInit {
     this.envService.getEnv().subscribe((res) => {
       console.log(res);
       this.secretToken = res;
-    });
+    }),
+      () => {
+        console.log('CanÂ´t find the backend URL, using a failover value');
+        sessionStorage.setItem('url_backend', 'https://failover-url.com');
+      };
   }
   getAPIData() {
-    try {
+    /*  try {
       this.http
         .get(`${window.location.origin}/config-vars`)
         .subscribe((response: any) => {
@@ -63,7 +67,10 @@ export class AppComponent implements OnInit {
     } catch (error) {
       console.log('error');
       //catch error
-    }
+    } */
+    this.envService.getKEyFromNode().subscribe((res) => {
+      console.log(res);
+    });
   }
 
   selectTab(tabName: string) {

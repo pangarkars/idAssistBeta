@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
     this.getAPIData();
     // this.fetchSecretKey();
     this.loadEnv();
+    this.loadEnv1();
   }
 
   fetchSecretKey() {
@@ -48,6 +49,17 @@ export class AppComponent implements OnInit {
     this.envService.getEnv().subscribe((res) => {
       console.log(res);
       this.secretToken = res;
+    }),
+      () => {
+        console.log('CanÂ´t find the backend URL, using a failover value');
+        sessionStorage.setItem('url_backend', 'https://failover-url.com');
+      };
+  }
+
+  loadEnv1() {
+    this.envService.getEnv1().subscribe((res) => {
+      console.log('#############');
+      console.log(res);
     }),
       () => {
         console.log('CanÂ´t find the backend URL, using a failover value');

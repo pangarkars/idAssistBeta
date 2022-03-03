@@ -20,9 +20,16 @@ export class EnvServiceService {
 
   getEnv(): Observable<any> {
     console.log('trying to get heroku env...');
-    return this.http
-      .get(window.location.origin + '/backendKey')
-      .pipe(map((response) => response));
+    //var url = window.location.origin;
+    var url = 'http://localhost:8080';
+    return this.http.get(url + '/backendKey').pipe(map((response) => response));
+  }
+
+  getEnv1(): Observable<any> {
+    console.log('trying to communicate with node');
+    //var url = window.location.origin;
+    var url = 'http://localhost:8080';
+    return this.http.get(url + '/dowork').pipe(map((response) => response));
   }
 
   getSecretKey(): Observable<any> {
@@ -56,7 +63,9 @@ export class EnvServiceService {
   }
 
   getKEyFromNode(): Observable<any> {
-    const url = `${window.location.origin}/config-vars`;
+    //const url = `${window.location.origin}/config-vars`;
+
+    var url = 'http://localhost:8080/config-vars';
     return this.http
       .get(url, { responseType: 'text' })
       .pipe(map((response: any) => response));

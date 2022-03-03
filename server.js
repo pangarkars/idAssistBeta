@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const axios = require("axios");
+var router = express.Router();
 
 let SECRET_KEY = "";
 
@@ -65,7 +66,12 @@ app.get("/backendKey", (req, res) => {
   res.json({ url: process.env.BACKEND_URL });
 });
 
-const PORT = process.env.PORT || 8080;
+router.get("/dowork", function (res, req) {
+  console.log(req);
+  res.json({ message: "Sending response to Angular" });
+});
+
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

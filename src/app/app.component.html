@@ -43,7 +43,9 @@
               <button
                 class="btn fw-bold promptText"
                 [ngClass]="{ activePromptBtn: currentPromptBtn == 'btn' + i }"
-                (click)="setPromptData(item.data, 'btn' + i)"
+                (click)="
+                  setPromptData(item.data, 'btn' + i, item.inputHelpText)
+                "
               >
                 {{ item.name }}
               </button>
@@ -52,9 +54,10 @@
               class="d-inline-block"
               tabindex="0"
               data-bs-toggle="tooltip"
+              data-bs-placement="left"
               title="{{ item.information }}"
             >
-              <i class="bi bi-info-circle"></i>
+              <i class="bi bi-info-circle infoIcon"></i>
             </span>
           </li>
         </ul>
@@ -98,7 +101,11 @@
         #outputText="ngModel"
         (keydown)="wordCounter(outputTextStr)"
       ></textarea>
-      <button type="button" class="btn btn-primary btnWidth mt-2 mb-2">
+      <button
+        type="button"
+        class="btn btn-primary btnWidth mt-2 mb-2 bi bi-clipboard"
+        (click)="copyContent()"
+      >
         Copy
       </button>
     </div>

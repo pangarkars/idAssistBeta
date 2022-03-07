@@ -75,3 +75,15 @@
 .pointerCursor {
   cursor: pointer;
 }
+textarea {
+  resize: none;
+}
+::ng-deep .my-custom-class .arrow::before {
+  border-top-color: black;
+}
+.beautifier {
+  font-size: larger;
+}
+.tooltip {
+  background-color: green !important;
+}

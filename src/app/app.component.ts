@@ -1,3 +1,4 @@
+declare var bootstrap: any;
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import data from '../data/promptData.json';
 import { Configuration, OpenAIApi } from 'openai';
@@ -6,6 +7,7 @@ import { EnvServiceService } from './env-service.service';
 import { ClipboardService } from 'ngx-clipboard';
 /* import * as bootstrap from 'bootstrap';*/
 import Modal from 'bootstrap/js/dist/modal';
+import Tooltip from 'bootstrap/js/dist/tooltip';
 /* import { Toast } from 'bootstrap'; */
 
 @Component({
@@ -24,7 +26,7 @@ export class AppComponent implements OnInit {
   inputTextStr: string = '';
   outputTextStr: string = '';
   outputResponse: any;
-  maxWords: number = 1000;
+  maxWords: number = 10;
   currentPromptData: string = '';
   currentPromptBtn: string = '';
   showLoader: boolean = false;
@@ -66,6 +68,7 @@ export class AppComponent implements OnInit {
     this.getAPIData();
     // this.fetchSecretKey();
     this.loadEnv();
+    this.setPromptData(this.promptData[0].data, 'btn0');
   }
 
   fetchSecretKey() {
@@ -111,18 +114,23 @@ export class AppComponent implements OnInit {
       this.showOutput = true;
     }
   }
-  wordCounter(str: string) {
+
+  wordCounter(str: string, e: any) {
+    const ev = <KeyboardEvent>event;
     this.wordCount = str ? str.split(/\s+/) : 0;
     this.totalWords = this.wordCount ? this.wordCount.length : 0;
+    if (this.totalWords > this.maxWords) {
+      const ctrlDown = e.ctrlKey;
+      if (e.keyCode == 8 || e.keyCode == 46 || (ctrlDown && e.keyCode == 88)) {
+      } else {
+        ev.preventDefault();
+      }
+    }
   }
-  setPromptData(promptData: string, currentBtn: string, inputHelpText: string) {
-    this.inputTextStr = '';
+  setPromptData(promptData: string, currentBtn: string) {
+    //this.inputTextStr = '';
     this.currentPromptData = promptData;
     this.currentPromptBtn = currentBtn;
-    /*    this.currInputHelpText = inputHelpText;
-    if (this.currInputHelpText != '') {
-      this.inputTextStr = this.currInputHelpText + '\n';
-    } */
   }
   configuration = new Configuration({
     apiKey: this.testToken.replace(/#1212#/g, ''),

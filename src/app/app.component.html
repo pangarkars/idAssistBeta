@@ -45,9 +45,7 @@
               <button
                 class="btn fw-bold promptText"
                 [ngClass]="{ activePromptBtn: currentPromptBtn == 'btn' + i }"
-                (click)="
-                  setPromptData(item.data, 'btn' + i, item.inputHelpText)
-                "
+                (click)="setPromptData(item.data, 'btn' + i)"
               >
                 {{ item.name }}
               </button>
@@ -58,6 +56,8 @@
               data-bs-toggle="tooltip"
               data-bs-placement="left"
               title="{{ item.information }}"
+              data-bs-custom-class="beautifier"
+              trigger="manual"
             >
               <i class="bi bi-info-circle infoIcon"></i>
             </span>
@@ -73,12 +73,11 @@
         type="text"
         class="form-control inputHeight mt-2 mb-2"
         id="inputText"
-        [attr.disabled]="totalWords > maxWords ? '' : null"
         rows="3"
         name="inputText"
         [(ngModel)]="inputTextStr"
         #inputText="ngModel"
-        (keydown)="wordCounter(inputTextStr)"
+        (keydown)="wordCounter(inputTextStr, $event)"
       ></textarea>
       <button
         type="button"
@@ -96,12 +95,11 @@
         type="text"
         class="form-control inputHeight mt-2 mb-2"
         id="outputText"
-        [attr.disabled]="totalWords > maxWords ? '' : null"
         rows="3"
         name="outputText"
         [(ngModel)]="outputTextStr"
         #outputText="ngModel"
-        (keydown)="wordCounter(outputTextStr)"
+        readonly
       ></textarea>
       <button
         type="button"

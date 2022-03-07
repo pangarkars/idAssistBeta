@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import data from '../data/promptData.json';
 import { Configuration, OpenAIApi } from 'openai';
 import { HttpClient } from '@angular/common/http';
 import { EnvServiceService } from './env-service.service';
 import { ClipboardService } from 'ngx-clipboard';
-import { Observable } from 'rxjs';
+/* import { Toast } from 'bootstrap'; */
 
 @Component({
   selector: 'app-root',
@@ -31,6 +31,12 @@ export class AppComponent implements OnInit {
     '#1212#sk-iSwTwSy8NXDN7afXsebpT3Blbk#1212#FJUCoHbGUuxeba0gG4eA0n#1212#';
 
   currInputHelpText: string = '';
+  toastMsg: any;
+  message: string = '';
+
+  toastElemObj: any;
+
+  /* @ViewChild('myToast') toastEl!: ElementRef; */
 
   constructor(
     private http: HttpClient,
@@ -39,6 +45,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // this.toastElemObj = new Toast(this.toastEl.nativeElement, {});
     this.getAPIData();
     // this.fetchSecretKey();
     this.loadEnv();
@@ -95,10 +102,10 @@ export class AppComponent implements OnInit {
     this.inputTextStr = '';
     this.currentPromptData = promptData;
     this.currentPromptBtn = currentBtn;
-    this.currInputHelpText = inputHelpText;
+    /*    this.currInputHelpText = inputHelpText;
     if (this.currInputHelpText != '') {
       this.inputTextStr = this.currInputHelpText + '\n';
-    }
+    } */
   }
   configuration = new Configuration({
     apiKey: this.testToken.replace(/#1212#/g, ''),
@@ -127,6 +134,7 @@ export class AppComponent implements OnInit {
       this.outputTextStr = this.outputResponse.data.choices[0].text;
       this.outputTextStr = this.outputTextStr.replace(/^\s+|\s+$/g, '');
       this.showLoader = false;
+      this.selectTab('output');
     } catch (error: any) {
       console.log(error);
       this.showLoader = false;
@@ -135,5 +143,7 @@ export class AppComponent implements OnInit {
 
   copyContent() {
     this.clipboardApi.copyFromContent(this.outputTextStr);
+    this.message = 'Content is copied to clipboard';
+    //return !this.toastEl.nativeElement.classList.contains('show');
   }
 }

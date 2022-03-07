@@ -57,7 +57,7 @@
     {
       "name": "Custom",
       "data": "",
-      "inputHelpText": "Insert a short, custom descriptive prompt above the input text provided by you.",
+      "inputHelpText": "<Insert a short, custom descriptive prompt above the input text provided by you.>",
       "information": "Add your own custom prompt"
     }
   ]

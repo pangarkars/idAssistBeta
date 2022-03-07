@@ -4,6 +4,8 @@ import { Configuration, OpenAIApi } from 'openai';
 import { HttpClient } from '@angular/common/http';
 import { EnvServiceService } from './env-service.service';
 import { ClipboardService } from 'ngx-clipboard';
+/* import * as bootstrap from 'bootstrap';*/
+import Modal from 'bootstrap/js/dist/modal';
 /* import { Toast } from 'bootstrap'; */
 
 @Component({
@@ -35,6 +37,19 @@ export class AppComponent implements OnInit {
   message: string = '';
 
   toastElemObj: any;
+  temperature: number = 0.7;
+  max_tokens: number = 500;
+  top_p: number = 1;
+  frequency_penalty: number = 2;
+  presence_penalty: number = 0;
+
+  orig_temperature: number = 0.7;
+  orig_max_tokens: number = 500;
+  orig_top_p: number = 1;
+  orig_frequency_penalty: number = 2;
+  orig_presence_penalty: number = 0;
+
+  configModal: any;
 
   /* @ViewChild('myToast') toastEl!: ElementRef; */
 
@@ -45,6 +60,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const myModal: any = document.getElementById('openAiConfigsModal');
+    this.configModal = new Modal(myModal);
     // this.toastElemObj = new Toast(this.toastEl.nativeElement, {});
     this.getAPIData();
     // this.fetchSecretKey();
@@ -123,11 +140,11 @@ export class AppComponent implements OnInit {
             '\n------\n' +
             this.inputTextStr +
             '\n------',
-          temperature: 0.7,
-          max_tokens: 500,
-          top_p: 1,
-          frequency_penalty: 2,
-          presence_penalty: 0,
+          temperature: Number(this.temperature),
+          max_tokens: Number(this.max_tokens),
+          top_p: Number(this.top_p),
+          frequency_penalty: Number(this.frequency_penalty),
+          presence_penalty: Number(this.presence_penalty),
         }
       );
       this.outputResponse = completion;
@@ -145,5 +162,29 @@ export class AppComponent implements OnInit {
     this.clipboardApi.copyFromContent(this.outputTextStr);
     this.message = 'Content is copied to clipboard';
     //return !this.toastEl.nativeElement.classList.contains('show');
+  }
+
+  openModal() {
+    this.orig_temperature = this.temperature;
+    this.orig_max_tokens = this.max_tokens;
+    this.orig_top_p = this.top_p;
+    this.orig_frequency_penalty = this.frequency_penalty;
+    this.orig_presence_penalty = this.presence_penalty;
+    this.configModal.show();
+    //this.configModal.
+    // const modalRef = this.modalService.open(ModalContentComponent);
+    // modalRef.componentInstance.user = this.user;
+  }
+
+  saveModalChanges() {
+    this.configModal.hide();
+  }
+  discardModalChanges() {
+    this.configModal.hide();
+    this.temperature = this.orig_temperature;
+    this.max_tokens = this.orig_max_tokens;
+    this.top_p = this.orig_top_p;
+    this.frequency_penalty = this.orig_frequency_penalty;
+    this.presence_penalty = this.orig_presence_penalty;
   }
 }

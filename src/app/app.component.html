@@ -3,7 +3,9 @@
   <nav class="navbar navbar-light">
     <div class="container-fluid">
       <div class="navbar-brand">ID-Assist (Beta)</div>
-      <div class="d-flex">© 2022 Asterial</div>
+      <div class="d-flex pointerCursor" (click)="openModal()">
+        © 2022 Asterial
+      </div>
     </div>
   </nav>
 </div>
@@ -118,9 +120,9 @@
   </div>
   <div class="toast-body">{{ message }}</div>
 </div> -->
-<!-- <div
+<div
   class="modal fade"
-  id="exampleModal"
+  id="openAiConfigsModal"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
@@ -142,21 +144,36 @@
             >Temperature</label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="inputTemperature" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputTemperature"
+              [(ngModel)]="temperature"
+            />
           </div>
         </div>
         <div class="mb-3 row">
           <label for="max_tokens" class="col-sm-4 col-form-label"
-            >Mac Tokens</label
+            >Max Tokens</label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="max_tokens" />
+            <input
+              type="text"
+              class="form-control"
+              id="max_tokens"
+              [(ngModel)]="max_tokens"
+            />
           </div>
         </div>
         <div class="mb-3 row">
           <label for="top_p" class="col-sm-4 col-form-label">Top P</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="top_p" />
+            <input
+              type="text"
+              class="form-control"
+              id="top_p"
+              [(ngModel)]="top_p"
+            />
           </div>
         </div>
         <div class="mb-3 row">
@@ -164,7 +181,12 @@
             >Frequency Penalty</label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="frequency_penalty" />
+            <input
+              type="text"
+              class="form-control"
+              id="frequency_penalty"
+              [(ngModel)]="frequency_penalty"
+            />
           </div>
         </div>
         <div class="mb-3 row">
@@ -172,27 +194,36 @@
             >Presence Penalty</label
           >
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="presence_penalty" />
+            <input
+              type="text"
+              class="form-control"
+              id="presence_penalty"
+              [(ngModel)]="presence_penalty"
+            />
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="discardModalChanges()"
+        >
+          Cancel
         </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveModalChanges()"
+        >
+          Save changes
+        </button>
       </div>
     </div>
   </div>
 </div>
-<button
-  type="button"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModal"
->
-  Launch demo modal
-</button> -->
+
 <div class="text-center spinner" *ngIf="showLoader">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>

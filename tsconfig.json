@@ -20,6 +20,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
+  "paths": {
+    "tslib": ["./node_modules/tslib/tslib.d.ts"]
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

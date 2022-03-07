@@ -3,52 +3,62 @@
     {
       "name": "Summarize",
       "data": "Paraphrase the following content in 300 words.",
-      "information": "More info about the summary"
+      "inputHelpText": "",
+      "information": "Content summary in 300 words"
     },
     {
       "name": "Content Outline",
-      "data": "Write a Content Outline",
-      "information": "More info about the Content Outline"
+      "data": "Create an Instructional System Design (ISD) for a Web Based Training (WBT) using the below content.",
+      "inputHelpText": "",
+      "information": "Proposed WBT content outlinee"
     },
     {
       "name": "Content Chunk (Bloom)",
-      "data": "Write a Content Chunk (Bloom)",
-      "information": "More info about the Content Chunk (Bloom)"
+      "data": "Apply Bloom’s Taxonomy six different classification levels: Knowledge, Comprehension, Application, Analysis, Synthesis and Evaluation to the below content.",
+      "inputHelpText": "",
+      "information": "Content classification per Revised Bloom's Taxonomy"
     },
     {
       "name": "Learning Objectives (Mager)",
       "data": "Create course learning objectives for the following content applying Robert Mager's performance-based learning objectives model.",
-      "information": "More info about the Learning Objectives (Mager)"
+      "inputHelpText": "",
+      "information": "Course Learning Objectives per Robert Mager's LOM"
     },
     {
       "name": "Quiz (Multiple Choice)",
-      "data": "Write a Quiz (Multiple Choice)",
-      "information": "More info about the Quiz (Multiple Choice)"
+      "data": "Create 3 multiple choice quiz questions from the following content, from Remembering, Understanding, and Applying levels of the Revised Bloom's taxonomy.",
+      "inputHelpText": "",
+      "information": "Three suggested MCQs based on provided content"
     },
     {
       "name": "FAQs",
       "data": "Create 5 FAQs from the following content.",
-      "information": "More info about the FAQs"
+      "inputHelpText": "",
+      "information": "Five frequently asked questions based on provided content"
     },
     {
       "name": "Best Practices",
-      "data": "Write Best Practices ",
-      "information": "More info about the Best Practices"
+      "data": "Create a list of best practises based on the content below.",
+      "inputHelpText": "",
+      "information": "List of best practices (if applicable) per provided content"
     },
     {
       "name": "Scenario",
-      "data": "Write a Scenario",
-      "information": "More info about the Scenario"
+      "data": "Create a context-setting scenario to introduce the following content to learners in a Web Based Training (WBT).",
+      "inputHelpText": "",
+      "information": "Context-setting scenario per content provided"
     },
     {
       "name": "Grammar Correction",
-      "data": "Write a Grammar Correction",
-      "information": "More info about the Grammar Correction"
+      "data": "Review the following content and modify it with proper grammar construction.",
+      "inputHelpText": "",
+      "information": "Grammatically modified content"
     },
     {
       "name": "Custom",
-      "data": "Write a Custom prompt",
-      "information": "More info about the Custom prompt"
+      "data": "",
+      "inputHelpText": "<Insert a short, custom descriptive prompt above the input text provided by you.>",
+      "information": "Add your own custom prompt"
     }
   ]
 }

@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpResponse,
-  HttpHeaders,
-  HttpRequest,
-  HttpErrorResponse,
-} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -34,25 +28,8 @@ export class EnvServiceService {
     return this.http.get(API_URL, { headers: this.httpHeaders }).pipe(
       map((res: any) => {
         return res || {};
-      }),
-      catchError(this.handleError)
+      })
     );
-  }
-
-  // Error
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Handle client error
-      errorMessage = error.error.message;
-    } else {
-      // Handle server error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(() => {
-      errorMessage;
-    });
   }
 
   getKEyFromNode(): Observable<any> {

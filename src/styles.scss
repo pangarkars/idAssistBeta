@@ -12,9 +12,14 @@
 }
 .header {
   overflow: hidden;
-  background-color: #2eb4cc;
+  background-color: #674ea7;
   padding: 0px 10px;
   height: auto;
+  color: #ffffff;
+}
+.headerText {
+  font-size: 24px;
+  font-weight: bold;
 }
 .itemLabel {
   height: 50px;
@@ -23,8 +28,9 @@
   text-align: center;
 }
 .itemPrompt {
-  background-color: rgb(132, 136, 136);
+  background-color: #9e9e9e;
   cursor: default;
+  color: white;
 }
 .itemInputOutput {
   background-color: rgb(231, 238, 238);
@@ -86,4 +92,19 @@ textarea {
 }
 .tooltip {
   background-color: green !important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #674ea7;
+  border-color: #674ea7; /*set the color you want here*/
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #000000;
+  background-color: #674ea7;
+  border-color: #674ea7; /*set the color you want here*/
 }

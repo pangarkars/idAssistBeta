@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   inputTextStr: string = '';
   outputTextStr: string = '';
   outputResponse: any;
-  maxWords: number = 1000;
+  maxWords: number = 10;
   currentPromptData: string = '';
   currentPromptBtn: string = '';
   showLoader: boolean = false;
@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
   orig_presence_penalty: number = 0;
 
   configModal: any;
+  selectedPromptIndex: number = 0;
 
   /* @ViewChild('myToast') toastEl!: ElementRef; */
 
@@ -68,7 +69,7 @@ export class AppComponent implements OnInit {
     this.getAPIData();
     // this.fetchSecretKey();
     this.loadEnv();
-    this.setPromptData(this.promptData[0].data, 'btn0');
+    this.setPromptData(this.promptData[0].data, 'btn0', 0);
   }
 
   fetchSecretKey() {
@@ -123,14 +124,22 @@ export class AppComponent implements OnInit {
       const ctrlDown = e.ctrlKey;
       if (e.keyCode == 8 || e.keyCode == 46 || (ctrlDown && e.keyCode == 88)) {
       } else {
+        /* var text = str.split(' '); // grabs the text and splits it
+        while (text.length > this.maxWords) {
+          text.pop(); // remove the last word
+        }
+        this, (this.inputTextStr = text.join(' ')); */
         ev.preventDefault();
       }
     }
   }
-  setPromptData(promptData: string, currentBtn: string) {
+  setPromptData(promptData: string, currentBtn: string, index: number) {
     //this.inputTextStr = '';
     this.currentPromptData = promptData;
     this.currentPromptBtn = currentBtn;
+    this.selectedPromptIndex = index;
+    this.outputTextStr = this.promptData[index].generatedOutput;
+    this.selectTab('input');
   }
   configuration = new Configuration({
     apiKey: this.testToken.replace(/#1212#/g, ''),
@@ -159,6 +168,8 @@ export class AppComponent implements OnInit {
       this.outputTextStr = this.outputResponse.data.choices[0].text;
       this.outputTextStr = this.outputTextStr.replace(/^\s+|\s+$/g, '');
       this.showLoader = false;
+      this.promptData[this.selectedPromptIndex].generatedOutput =
+        this.outputTextStr;
       this.selectTab('output');
     } catch (error: any) {
       console.log(error);

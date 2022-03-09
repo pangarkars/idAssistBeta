@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   inputTextStr: string = '';
   outputTextStr: string = '';
   outputResponse: any;
-  maxWords: number = 10;
+  maxWords: number = 1000;
   currentPromptData: string = '';
   currentPromptBtn: string = '';
   showLoader: boolean = false;

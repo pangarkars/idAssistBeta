@@ -1,5 +1,4 @@
-declare var bootstrap: any;
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import data from '../data/promptData.json';
 import { Configuration, OpenAIApi } from 'openai';
 import { HttpClient } from '@angular/common/http';
@@ -8,14 +7,15 @@ import { ClipboardService } from 'ngx-clipboard';
 /* import * as bootstrap from 'bootstrap';*/
 import Modal from 'bootstrap/js/dist/modal';
 import Tooltip from 'bootstrap/js/dist/tooltip';
-/* import { Toast } from 'bootstrap'; */
+import Popover from 'bootstrap/js/dist/Popover';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'id-assist';
   promptData = data.prompt;
   showInput: boolean = true;
@@ -63,8 +63,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const myModal: any = document.getElementById('openAiConfigsModal');
-    this.configModal = new Modal(myModal);
     // this.toastElemObj = new Toast(this.toastEl.nativeElement, {});
     this.getAPIData();
     // this.fetchSecretKey();
@@ -72,6 +70,18 @@ export class AppComponent implements OnInit {
     this.setPromptData(this.promptData[0].data, 'btn0', 0);
   }
 
+  ngAfterViewInit() {
+    // ...
+    const myModal: any = document.getElementById('openAiConfigsModal');
+    this.configModal = new Modal(myModal);
+
+    var tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }
   fetchSecretKey() {
     this.envService.getSecretKey().subscribe((res) => {
       console.log(res);

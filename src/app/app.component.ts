@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   showLoader: boolean = false;
   secretToken: string = '';
   testToken: string =
-    '#1212#sk-iSwTwSy8NXDN7afXsebpT3Blbk#1212#FJUCoHbGUuxeba0gG4eA0n#1212#';
+    '#1212#sk-0rof1dxvSSoRyrF2oV5iT3B#1212#lbkFJBoOddDpWxHzR6WMNwFdY#1212#';
 
   currInputHelpText: string = '';
   toastMsg: any;

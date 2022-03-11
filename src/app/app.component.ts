@@ -4,10 +4,7 @@ import { Configuration, OpenAIApi } from 'openai';
 import { HttpClient } from '@angular/common/http';
 import { EnvServiceService } from './env-service.service';
 import { ClipboardService } from 'ngx-clipboard';
-/* import * as bootstrap from 'bootstrap';*/
 import Modal from 'bootstrap/js/dist/modal';
-import Tooltip from 'bootstrap/js/dist/tooltip';
-import Popover from 'bootstrap/js/dist/Popover';
 declare var bootstrap: any;
 
 @Component({
@@ -52,6 +49,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   orig_presence_penalty: number = 0;
 
   configModal: any;
+  errorToastMsgBox: any;
+  toastMsgBox: any;
   selectedPromptIndex: number = 0;
 
   /* @ViewChild('myToast') toastEl!: ElementRef; */
@@ -67,13 +66,17 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.getAPIData();
     // this.fetchSecretKey();
     this.loadEnv();
-    this.setPromptData(this.promptData[0].data, 'btn0', 0);
   }
 
   ngAfterViewInit() {
-    // ...
     const myModal: any = document.getElementById('openAiConfigsModal');
     this.configModal = new Modal(myModal);
+
+    const errorToast: any = document.getElementById('errorToast');
+    this.errorToastMsgBox = bootstrap.Toast.getOrCreateInstance(errorToast);
+
+    const msgToast: any = document.getElementById('messageToast');
+    this.toastMsgBox = bootstrap.Toast.getOrCreateInstance(msgToast);
 
     var tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -81,7 +84,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl);
     });
+
+    this.setPromptData(this.promptData[0].data, 'btn0', 0);
   }
+
   fetchSecretKey() {
     this.envService.getSecretKey().subscribe((res) => {
       console.log(res);
@@ -131,6 +137,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.wordCount = str ? str.split(/\s+/) : 0;
     this.totalWords = this.wordCount ? this.wordCount.length : 0;
     if (this.totalWords > this.maxWords) {
+      this.message = 'Please restrict the word count to 1000 words';
+      this.errorToastMsgBox.show();
       const ctrlDown = e.ctrlKey;
       if (e.keyCode == 8 || e.keyCode == 46 || (ctrlDown && e.keyCode == 88)) {
       } else {
@@ -144,6 +152,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
   setPromptData(promptData: string, currentBtn: string, index: number) {
+    //this.toastMsgBox.show();
     //this.inputTextStr = '';
     this.currentPromptData = promptData;
     this.currentPromptBtn = currentBtn;
@@ -182,15 +191,16 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.outputTextStr;
       this.selectTab('output');
     } catch (error: any) {
-      console.log(error);
       this.showLoader = false;
+      this.message = 'Error fetching the output!!';
+      this.errorToastMsgBox.show();
     }
   }
 
   copyContent() {
     this.clipboardApi.copyFromContent(this.outputTextStr);
-    this.message = 'Content is copied to clipboard';
-    //return !this.toastEl.nativeElement.classList.contains('show');
+    this.message = 'Content copied to clipboard';
+    this.toastMsgBox.show();
   }
 
   openModal() {
@@ -200,9 +210,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.orig_frequency_penalty = this.frequency_penalty;
     this.orig_presence_penalty = this.presence_penalty;
     this.configModal.show();
-    //this.configModal.
-    // const modalRef = this.modalService.open(ModalContentComponent);
-    // modalRef.componentInstance.user = this.user;
   }
 
   saveModalChanges() {

@@ -88,7 +88,7 @@ textarea {
   border-top-color: black;
 }
 .beautifier {
-  font-size: larger;
+  font-size: large;
 }
 
 .btn-primary {
@@ -104,4 +104,17 @@ textarea {
   color: #000000;
   background-color: #674ea7;
   border-color: #674ea7; /*set the color you want here*/
+}
+
+.errorToast {
+  background-color: red;
+  color: white;
+  font-size: medium;
+  font-weight: 500;
+}
+.messageToast {
+  background-color: #2e844a;
+  color: white;
+  font-size: medium;
+  font-weight: 500;
 }

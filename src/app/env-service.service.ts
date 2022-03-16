@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+const baseUrl = 'http://localhost:8080/api/idassists';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,10 @@ export class EnvServiceService {
     return this.http
       .get(url, { responseType: 'text' })
       .pipe(map((response: any) => response));
+  }
+
+  createRecord(data: any): Observable<any> {
+    return this.http.post('/api/idassists', data);
   }
   /*   getToken(){
     this.http

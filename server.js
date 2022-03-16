@@ -1,4 +1,4 @@
-process.env.NODE_ENV != "production" ? require("dotenv").config() : null;
+//process.env.NODE_ENV != "production" ? require("dotenv").config() : null;
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -27,14 +27,14 @@ app.get("/", (req, res) => {
 /**
  * function to redirect traffic from http to https
  */
-/*function requireHTTPS(req, res, next) {
+function requireHTTPS(req, res, next) {
   // The 'x-forwarded-proto' check is for Heroku
   if (!req.secure && req.get("x-forwarded-proto") !== "https") {
     return res.redirect("https://" + req.get("host") + req.url);
   }
   next();
 }
-app.use(requireHTTPS);*/
+app.use(requireHTTPS);
 
 app.use(express.static(__dirname + "/dist/id-assist"));
 

@@ -190,14 +190,34 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.promptData[this.selectedPromptIndex].generatedOutput =
         this.outputTextStr;
       this.selectTab('output');
+      this.saveData();
     } catch (error: any) {
       this.showLoader = false;
       this.message = 'Error fetching the output!!';
       this.errorToastMsgBox.show();
     }
   }
-
+  saveData() {
+    this.currentPromptData = 'Test prompt data';
+    this.inputTextStr = 'test input data';
+    this.outputTextStr = 'test out put data';
+    const data = {
+      prompt: this.currentPromptData,
+      input: this.inputTextStr,
+      output: this.outputTextStr,
+    };
+    this.envService.createRecord(data).subscribe(
+      (response) => {
+        console.log('Data saved in db');
+      },
+      (error) => {
+        console.error('Error daving data in db');
+        console.log(error);
+      }
+    );
+  }
   copyContent() {
+    this.saveData();
     this.clipboardApi.copyFromContent(this.outputTextStr);
     this.message = 'Content copied to clipboard';
     this.toastMsgBox.show();

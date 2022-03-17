@@ -190,7 +190,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.promptData[this.selectedPromptIndex].generatedOutput =
         this.outputTextStr;
       this.selectTab('output');
-      this.saveData();
+      //this.saveData();
     } catch (error: any) {
       this.showLoader = false;
       this.message = 'Error fetching the output!!';
@@ -217,7 +217,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     );
   }
   copyContent() {
-    this.saveData();
+    // this.saveData();
     this.clipboardApi.copyFromContent(this.outputTextStr);
     this.message = 'Content copied to clipboard';
     this.toastMsgBox.show();

@@ -1,29 +1,11 @@
-//process.env.NODE_ENV != "production" ? require("dotenv").config() : null;
+
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
 const path = require("path");
 const app = express();
 const axios = require("axios");
 
 let SECRET_KEY = "";
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
-app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = require("./src/app/models");
-db.sequelize.sync();
-
-/* db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-}); */
-
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Angular PostGreSql App for IdAssist" });
-});
 /**
  * function to redirect traffic from http to https
  */
@@ -56,6 +38,8 @@ var options = {
     "api-key": process.env.OPENAI_SECRET_KEY,
   },
 };
+console.log("#####");
+console.log(options);
 
 /**
  * API call
@@ -81,8 +65,6 @@ app.get("/config-vars", (req, res) => {
 app.get("/backendKey", (req, res) => {
   res.json({ url: process.env.BACKEND_URL });
 });
-
-require("./src/app/routes/idassist.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
